@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>morrie flips</title>
+    <link href="/css/style.css" rel="stylesheet"  />
+      <link href="/css/style2.css" rel="stylesheet"  />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="navbar">
+    <a class="btn" href="/index.html"><i class="fa fa-home" ></i> Home</a>
+	<a class="btn" href="/subpage.html"><i class="fa fa-weixin" ></i> Live Messages</a>
+
+<a class="btn" href="https://www.instagram.com/fanpage._morrie.flips/"><i class="fa fa-instagram"  ></i> Fanpage</a>
+<a class="btn" class="donate" href="https://www.paypal.me/510BBuck"><i class="fa fa-money"  ></i> Donate</a>
+
+</div>  
+ 
+  <div id="l">
+   <h1>Chatroom</h1>
+    	<form name="eman" >
+  <p class="name">Your name: <input type="text" name="name" placeholder="Name" value=""></p>
+  </form>
+	<p id="message" class="message"></p>
+	<form name="myform" class="inp">
+		<p>Say sum:
+    <input type="text" name="words" placeholder="message" value=""> <input type="submit" value="Send" onclick="send(); return false;"></p>
+
+
+   
+</form>
+ </div>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script>
+
+
+
+var socket = io();
+
+	  function send(){
+	  	  socket.emit('name',{message:document.eman.name.value})
+
+	  socket.emit('msend',{message:document.myform.words.value});
+	  
+		document.myform.words.value = "";
+ 
+}
+	socket.on('mess',function update(data){
+	
+	 document.getElementById('message').innerHTML = data;
+  //document.myform.words.value = ""
+	});
+	
+	</script>
+  </body>
+</html>
